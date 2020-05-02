@@ -1,10 +1,20 @@
 import React from "react";
 import "./App.css";
+import { countItems } from "./countItems";
 import { ItemPicker } from "./ItemPicker";
 import items from "./items";
 import { MenuPreview } from "./MenuPreview";
 
 const orderedItems = items.sort((a, b) => a.name.localeCompare(b.name));
+
+const getDietaryTypes = (items) => {
+  // Put all into ordered array so the result is sorted
+  const all = items
+    .reduce((prev, curr) => [...prev, ...curr.dietaries], [])
+    .sort();
+
+  return countItems(all);
+};
 
 export default class App extends React.Component {
   state = {
@@ -43,6 +53,7 @@ export default class App extends React.Component {
   render() {
     const { state } = this;
     const itemCount = state.selectedItems.length;
+    const dietaryCounts = getDietaryTypes(state.selectedItems);
 
     return (
       <div className="wrapper">
@@ -55,9 +66,12 @@ export default class App extends React.Component {
                 }`}</span>
               </div>
               <div className="col-6 menu-summary-right">
-                6x <span className="dietary">ve</span>
-                4x <span className="dietary">v</span>
-                12x <span className="dietary">n!</span>
+                {Object.keys(dietaryCounts).map((d) => (
+                  <React.Fragment key={d}>
+                    {`${dietaryCounts[d]}x`}
+                    <span className="dietary">{d}</span>
+                  </React.Fragment>
+                ))}
               </div>
             </div>
           </div>
