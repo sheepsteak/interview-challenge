@@ -41,13 +41,18 @@ export default class App extends React.Component {
     });
 
   render() {
+    const { state } = this;
+    const itemCount = state.selectedItems.length;
+
     return (
       <div className="wrapper">
         <div className="menu-summary">
           <div className="container">
             <div className="row">
               <div className="col-6 menu-summary-left">
-                <span>5 items</span>
+                <span>{`${itemCount} ${
+                  itemCount === 1 ? "item" : "items"
+                }`}</span>
               </div>
               <div className="col-6 menu-summary-right">
                 6x <span className="dietary">ve</span>
@@ -67,7 +72,7 @@ export default class App extends React.Component {
             </div>
             <div className="col-8">
               <MenuPreview
-                items={this.state.selectedItems}
+                items={state.selectedItems}
                 onItemRemoveClick={this.handleItemRemoveClick}
               />
             </div>
