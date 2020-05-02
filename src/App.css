@@ -60,6 +60,10 @@ li.item {
   position: relative;
 }
 
+li.item:hover {
+  background: #ada;
+}
+
 li.item h2 {
   font-size: 12pt;
 }

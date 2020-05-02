@@ -21,7 +21,9 @@ const items = [
 ];
 
 it("renders passed items", () => {
-  const itemPicker = shallow(<ItemPicker items={items} />);
+  const itemPicker = shallow(
+    <ItemPicker items={items} onItemClick={() => {}} />
+  );
 
   const itemPickerItems = itemPicker.find(".item-picker").children();
 
@@ -29,4 +31,17 @@ it("renders passed items", () => {
   expect(itemPickerItems.at(0).text()).toContain(items[0].name);
   expect(itemPickerItems.at(1).text()).toContain(items[1].name);
   expect(itemPickerItems.at(2).text()).toContain(items[2].name);
+});
+
+it("calls onItemClick when item is clicked", () => {
+  const onItemClickMock = jest.fn();
+  const itemPicker = shallow(
+    <ItemPicker items={items} onItemClick={onItemClickMock} />
+  );
+
+  const itemPickerItems = itemPicker.find(".item-picker").children();
+  itemPickerItems.at(1).simulate("click");
+
+  expect(onItemClickMock).toHaveBeenCalledTimes(1);
+  expect(onItemClickMock).toHaveBeenCalledWith(items[1]);
 });
