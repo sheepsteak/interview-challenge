@@ -9,7 +9,7 @@ it("adds to selected items when item is clicked", () => {
   expect(app.find("[data-testid='menu-preview-item']")).toHaveLength(0);
 
   const items = app.find("[data-testid='item-picker-item']");
-  items.at(1).simulate("click");
+  items.at(1).find("button").simulate("click");
 
   expect(app.find("[data-testid='menu-preview-item']")).toHaveLength(1);
   expect(app.find(".menu-summary-left").text()).toContain("1 item");
@@ -21,11 +21,11 @@ it("prevents same item being selected twice", () => {
   expect(app.find("[data-testid='menu-preview-item']")).toHaveLength(0);
 
   const items = app.find("[data-testid='item-picker-item']");
-  items.at(1).simulate("click");
+  items.at(1).find("button").simulate("click");
 
   expect(app.find("[data-testid='menu-preview-item']")).toHaveLength(1);
 
-  items.at(1).simulate("click");
+  items.at(1).find("button").simulate("click");
 
   expect(app.find("[data-testid='menu-preview-item']")).toHaveLength(1);
   expect(app.find(".menu-summary-left").text()).toContain("1 item");
@@ -38,7 +38,7 @@ it("removes item when its remove button is clicked", () => {
   expect(app.find(".menu-summary-left").text()).toContain("0 items");
 
   const items = app.find("[data-testid='item-picker-item']");
-  items.at(1).simulate("click");
+  items.at(1).find("button").simulate("click");
 
   const previewItems = app.find("[data-testid='menu-preview-item']");
 
@@ -57,9 +57,9 @@ it("keeps track of dietary types for selected items", () => {
   expect(app.find("[data-testid='menu-preview-item']")).toHaveLength(0);
 
   const items = app.find("[data-testid='item-picker-item']");
-  items.at(1).simulate("click");
-  items.at(2).simulate("click");
-  items.at(3).simulate("click");
+  items.at(1).find("button").simulate("click");
+  items.at(2).find("button").simulate("click");
+  items.at(3).find("button").simulate("click");
 
   expect(app.find("[data-testid='menu-preview-item']")).toHaveLength(3);
   expect(app.find(".menu-summary-left").text()).toContain("3 items");

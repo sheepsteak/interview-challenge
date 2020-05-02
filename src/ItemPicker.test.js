@@ -40,7 +40,7 @@ it("calls onItemClick when item is clicked", () => {
   );
 
   const itemPickerItems = itemPicker.find(".item-picker").children();
-  itemPickerItems.at(1).simulate("click");
+  itemPickerItems.at(1).find("button").simulate("click");
 
   expect(onItemClickMock).toHaveBeenCalledTimes(1);
   expect(onItemClickMock).toHaveBeenCalledWith(items[1]);

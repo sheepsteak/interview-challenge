@@ -61,10 +61,6 @@ li.item {
   position: relative;
 }
 
-li.item:hover {
-  background: #ada;
-}
-
 li.item h2 {
   font-size: 12pt;
 }
@@ -73,13 +69,13 @@ li.item p {
   margin: 0;
 }
 
+button.add-item,
 button.remove-item {
   position: absolute;
   top: -13px;
   right: -13px;
   -webkit-appearance: none;
-  border: 2px solid #000;
-  background: #FFF;
+  background: #fff;
   font-weight: bold;
   width: 26px;
   height: 26px;
@@ -89,6 +85,27 @@ button.remove-item {
   cursor: pointer;
 }
 
+button.add-item {
+  border: 2px solid #0e0;
+  color: #0e0;
+}
+
+button.add-item:hover {
+  background: #0e0;
+  color: #fff;
+}
+
+button.remove-item {
+  border: 2px solid #000;
+  color: #000;
+}
+
+button.remove-item:hover {
+  background: #000;
+  color: #fff;
+}
+
+button.add-item:focus,
 button.remove-item:focus {
   outline: none;
 }
