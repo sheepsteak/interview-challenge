@@ -19,7 +19,24 @@ export default class App extends React.Component {
       }
 
       return {
+        ...state,
         selectedItems: [...state.selectedItems, item],
+      };
+    });
+
+  handleItemRemoveClick = (item) =>
+    this.setState((state) => {
+      const selectedItems = state.selectedItems.reduce((prev, curr) => {
+        if (curr.id === item.id) {
+          return prev;
+        }
+
+        return [...prev, curr];
+      }, []);
+
+      return {
+        ...state,
+        selectedItems,
       };
     });
 
@@ -49,7 +66,10 @@ export default class App extends React.Component {
               />
             </div>
             <div className="col-8">
-              <MenuPreview items={this.state.selectedItems} />
+              <MenuPreview
+                items={this.state.selectedItems}
+                onItemRemoveClick={this.handleItemRemoveClick}
+              />
             </div>
           </div>
         </div>

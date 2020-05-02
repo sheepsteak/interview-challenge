@@ -22,7 +22,7 @@ const items = [
 
 it("renders passed items", () => {
   const menuPreview = shallow(
-    <MenuPreview items={items} onItemClick={() => {}} />
+    <MenuPreview items={items} onItemRemoveClick={() => {}} />
   );
 
   const menuPreviewItems = menuPreview.find(".menu-preview").children();
@@ -31,4 +31,17 @@ it("renders passed items", () => {
   expect(menuPreviewItems.at(0).text()).toContain(items[0].name);
   expect(menuPreviewItems.at(1).text()).toContain(items[1].name);
   expect(menuPreviewItems.at(2).text()).toContain(items[2].name);
+});
+
+it("calls onItemRemoveClick when item remove button is clicked", () => {
+  const onItemRemoveClickMock = jest.fn();
+  const menuPreview = shallow(
+    <MenuPreview items={items} onItemRemoveClick={onItemRemoveClickMock} />
+  );
+
+  const previewItems = menuPreview.find(".menu-preview").children();
+  previewItems.at(1).find("button").simulate("click");
+
+  expect(onItemRemoveClickMock).toHaveBeenCalledTimes(1);
+  expect(onItemRemoveClickMock).toHaveBeenCalledWith(items[1]);
 });

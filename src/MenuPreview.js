@@ -1,6 +1,6 @@
 import React from "react";
 
-export const MenuPreview = ({ items }) => (
+export const MenuPreview = ({ items, onItemRemoveClick }) => (
   <div>
     <h2>Menu preview</h2>
     <ul className="menu-preview">
@@ -14,7 +14,13 @@ export const MenuPreview = ({ items }) => (
               </span>
             ))}
           </p>
-          <button className="remove-item">x</button>
+          <button
+            className="remove-item"
+            onClick={() => onItemRemoveClick(item)}
+            type="button"
+          >
+            x
+          </button>
         </li>
       ))}
     </ul>
